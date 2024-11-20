@@ -131,7 +131,7 @@ public class TblAgricultor implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.unicauca.apliweb.crud_java.persitence.entities.TblAgricultor[ idAgricultor=" + idAgricultor + " ]";
+        return "edu.unicauca.apliweb.crud_java.persistence.entities.TblAgricultor[ idAgricultor=" + idAgricultor + " ]";
     }
     
 }
