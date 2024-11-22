@@ -4,9 +4,19 @@
  */
 package edu.unicauca.apliweb.control;
 
+import edu.unicauca.apliweb.crud_java.persistence.entities.TblAgricultor;
+import edu.unicauca.apliweb.crud_java.persistence.jpa.TblAgricultorJpaController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,71 +25,162 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ortega
  */
-public class ServletCrudJava extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+@WebServlet("/")
+public class ServletCrudJava extends HttpServlet {
+    private TblAgricultorJpaController agricultorJpa;
+    private final static String PU = "edu.unicauca.apliweb_CRUD_JAVA_war_1.0PU";
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU);
+        agricultorJpa = new TblAgricultorJpaController(emf);
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ServletCrudJava</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ServletCrudJava at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String action = request.getServletPath();
+
+        try {
+            switch (action) {
+                case "/new":
+                    showNewForm(request, response);
+                    break;
+                case "/insert":
+                    insertAgricultor(request, response);
+                    break;
+                case "/delete":
+                    deleteAgricultor(request, response);
+                    break;
+                case "/edit":
+                    showEditForm(request, response);
+                    break;
+                case "/update":
+                    updateAgricultor(request, response);
+                    break;
+                default:
+                    listAgricultores(request, response);
+                    break;
+            }
+        } catch (SQLException ex) {
+            throw new ServletException(ex);
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    private void listAgricultores(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        List<TblAgricultor> listAgricultores = agricultorJpa.findTblAgricultorEntities();
+        request.setAttribute("listAgricultores", listAgricultores);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("list-agricultores.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void showNewForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("agricultor-form.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        TblAgricultor existingAgricultor = agricultorJpa.findTblAgricultor(id);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("agricultor-form.jsp");
+        request.setAttribute("agricultor", existingAgricultor);
+        dispatcher.forward(request, response);
+    }
+
+    private void insertAgricultor(HttpServletRequest request, HttpServletResponse response)
+        throws SQLException, IOException, ServletException {
+        String nombre = request.getParameter("nombre").trim();
+        String telefono = request.getParameter("telefono").trim();
+
+        if (nombre.isEmpty() || telefono.isEmpty()) {
+            // Mensaje de error si algún campo está vacío
+            request.setAttribute("message", "Error: Todos los campos son obligatorios.");
+            listAgricultores(request, response);
+            return;
+        }
+
+        try {
+            TblAgricultor agricultor = new TblAgricultor();
+            agricultor.setNombre(nombre);
+            agricultor.setTelefono(telefono);
+
+            agricultorJpa.create(agricultor);
+
+            // Mensaje de éxito
+            request.setAttribute("message", "Agricultor agregado exitosamente.");
+        } catch (Exception e) {
+            // Mensaje de error
+            request.setAttribute("message", "Error al agregar el agricultor: " + e.getMessage());
+        }
+        listAgricultores(request, response);
+    }
+
+
+    private void updateAgricultor(HttpServletRequest request, HttpServletResponse response)
+        throws SQLException, IOException, ServletException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String nombre = request.getParameter("nombre").trim();
+        String telefono = request.getParameter("telefono").trim();
+
+        if (nombre.isEmpty() || telefono.isEmpty()) {
+            // Mensaje de error si algún campo está vacío
+            request.setAttribute("message", "Error: Todos los campos son obligatorios.");
+            listAgricultores(request, response);
+            return;
+        }
+
+        try {
+            TblAgricultor agricultor = agricultorJpa.findTblAgricultor(id);
+            agricultor.setNombre(nombre);
+            agricultor.setTelefono(telefono);
+
+            agricultorJpa.edit(agricultor);
+
+            // Mensaje de éxito
+            request.setAttribute("message", "Agricultor actualizado exitosamente.");
+        } catch (Exception e) {
+            // Mensaje de error
+            request.setAttribute("message", "Error al actualizar el agricultor: " + e.getMessage());
+        }
+        listAgricultores(request, response);
+    }
+
+
+    private void deleteAgricultor(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException, SQLException {
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            agricultorJpa.destroy(id); // Método que lanza SQLException
+            request.setAttribute("message", "Agricultor eliminado exitosamente.");
+        } catch (Exception e) {
+            // Maneja otras excepciones
+            request.setAttribute("message", "Error al eliminar el agricultor: " + e.getMessage());
+        }
+        listAgricultores(request, response);
+    }
+
+
+
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "Descripción del ServletAppAgricultores";
+    }
 }
