@@ -9,6 +9,7 @@
     <class>edu.unicauca.apliweb.crud_java.persistence.entities.TblCliente</class>
     <class>edu.unicauca.apliweb.crud_java.persistence.entities.Usuarios</class>
     <class>edu.unicauca.apliweb.crud_java.persistence.entities.TblProductoCliente</class>
+    <class>edu.unicauca.apliweb.crud_java.persistence.entities.AuthenticationFilter</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bd_agricola?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

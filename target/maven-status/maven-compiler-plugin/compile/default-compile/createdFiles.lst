@@ -5,6 +5,7 @@ edu/unicauca/apliweb/crud_java/persistence/entities/TblCliente_.class
 edu/unicauca/apliweb/crud_java/persistence/entities/TblAgricultorCliente_.class
 edu/unicauca/apliweb/crud_java/persistence/jpa/TblProductoClienteJpaController.class
 edu/unicauca/apliweb/crud_java/persistence/jpa/exceptions/IllegalOrphanException.class
+edu/unicauca/apliweb/control/filters/AuthenticationFilter.class
 edu/unicauca/apliweb/crud_java/persistence/jpa/TblProductoJpaController.class
 edu/unicauca/apliweb/crud_java/persistence/entities/Usuarios_.class
 edu/unicauca/apliweb/crud_java/persistence/entities/Usuarios.class
@@ -20,6 +21,7 @@ edu/unicauca/apliweb/crud_java/persistence/entities/TblCliente.class
 edu/unicauca/apliweb/crud_java/persistence/entities/TblAgricultor_.class
 edu/unicauca/apliweb/crud_java/persistence/jpa/exceptions/PreexistingEntityException.class
 edu/unicauca/apliweb/crud_java/persistence/jpa/UsuariosJpaController.class
+edu/unicauca/apliweb/control/AuthServlet.class
 edu/unicauca/apliweb/crud_java/persistence/jpa/TblAgricultorJpaController.class
 edu/unicauca/apliweb/crud_java/persistence/entities/TblProducto.class
 edu/unicauca/apliweb/crud_java/persistence/jpa/TblAgricultorClienteJpaController.class

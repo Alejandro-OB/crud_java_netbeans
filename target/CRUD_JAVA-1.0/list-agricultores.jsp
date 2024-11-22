@@ -17,6 +17,8 @@
     <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
         <div>
             <a href="https://www.unicauca.edu.co" class="navbar-brand">Aplicación Ejemplo Apliweb</a>
+            <a href="<%=request.getContextPath()%>/logout" class="btn btn-danger">Cerrar sesión</a>
+
         </div>
         <div class="navbar-nav">
             <li><a href="<%=request.getContextPath()%>/list" class="nav-link">Lista Agricultores</a></li>

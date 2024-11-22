@@ -2,6 +2,7 @@
 /home/ortega/NetBeansProjects/CRUD_JAVA/src/main/java/edu/unicauca/apliweb/crud_java/persistence/jpa/TblAgricultorClienteJpaController.java
 /home/ortega/NetBeansProjects/CRUD_JAVA/src/main/java/edu/unicauca/apliweb/crud_java/persistence/jpa/exceptions/NonexistentEntityException.java
 /home/ortega/NetBeansProjects/CRUD_JAVA/src/main/java/edu/unicauca/apliweb/crud_java/persistence/jpa/exceptions/PreexistingEntityException.java
+/home/ortega/NetBeansProjects/CRUD_JAVA/src/main/java/edu/unicauca/apliweb/control/AuthServlet.java
 /home/ortega/NetBeansProjects/CRUD_JAVA/src/main/java/edu/unicauca/apliweb/crud_java/persistence/jpa/TblAgricultorJpaController.java
 /home/ortega/NetBeansProjects/CRUD_JAVA/src/main/java/edu/unicauca/apliweb/crud_java/persistence/jpa/TblAgricultorProductoJpaController.java
 /home/ortega/NetBeansProjects/CRUD_JAVA/src/main/java/edu/unicauca/apliweb/control/ServletCrudJava.java
@@ -13,6 +14,7 @@
 /home/ortega/NetBeansProjects/CRUD_JAVA/src/main/java/edu/unicauca/apliweb/crud_java/persistence/jpa/exceptions/IllegalOrphanException.java
 /home/ortega/NetBeansProjects/CRUD_JAVA/src/main/java/edu/unicauca/apliweb/crud_java/persistence/entities/TblAgricultorProducto.java
 /home/ortega/NetBeansProjects/CRUD_JAVA/src/main/java/edu/unicauca/apliweb/crud_java/persistence/entities/Usuarios.java
+/home/ortega/NetBeansProjects/CRUD_JAVA/src/main/java/edu/unicauca/apliweb/control/filters/AuthenticationFilter.java
 /home/ortega/NetBeansProjects/CRUD_JAVA/src/main/java/edu/unicauca/apliweb/crud_java/persistence/entities/TblAgricultor.java
 /home/ortega/NetBeansProjects/CRUD_JAVA/src/main/java/edu/unicauca/apliweb/crud_java/persistence/jpa/TblProductoJpaController.java
 /home/ortega/NetBeansProjects/CRUD_JAVA/src/main/java/edu/unicauca/apliweb/crud_java/persistence/entities/TblProducto.java
