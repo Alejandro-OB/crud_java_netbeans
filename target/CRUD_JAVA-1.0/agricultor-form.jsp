@@ -72,46 +72,48 @@
             max-width: 600px;
             margin: 50px auto;
             background-color: #ffffff;
-            padding: 50px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
         .form-group {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
         .form-group label {
             font-weight: 600;
             margin-bottom: 0.5rem;
             display: block;
             color: #333;
+            font-size: 1.2rem;
         }
         .form-control {
-            height: calc(2.5rem + 2px);
-            font-size: 1rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            height: calc(2.8rem + 2px);
+            font-size: 1.1rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             border: 1px solid #ced4da;
             transition: all 0.3s ease;
         }
         .form-control:focus {
             border-color: #28a745;
-            box-shadow: 0 0 8px rgba(40, 167, 69, 0.5);
+            box-shadow: 0 0 12px rgba(40, 167, 69, 0.5);
         }
         .btn-save {
             background-color: #004d40;
             color: #ffffff;
-            font-weight: 600;
-            border-radius: 25px;
-            padding: 0.8rem 1.5rem;
-            box-shadow: 0 8px 15px rgba(0, 77, 64, 0.4);
+            font-weight: 700;
+            border-radius: 50px;
+            padding: 0.9rem 2rem;
+            box-shadow: 0 10px 20px rgba(0, 77, 64, 0.4);
             border: none;
             transition: all 0.3s ease;
+            font-size: 1.1rem;
         }
         .btn-save:hover {
             background-color: #00352e;
             transform: translateY(-3px);
-            box-shadow: 0 12px 24px rgba(0, 77, 64, 0.3);
+            box-shadow: 0 12px 25px rgba(0, 77, 64, 0.3);
         }
         .alert {
             max-width: 600px;
@@ -131,12 +133,6 @@
             background-color: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
-        }
-        .alert-dismissible .close {
-            position: absolute;
-            top: 0;
-            right: 10px;
-            color: inherit;
         }
     </style>
 </head>
@@ -221,4 +217,3 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIyFf3VS3XhFp7ik3iDJwljV0G17H0o0Pb26U4A" crossorigin="anonymous"></script>
 </body>
 </html>
-

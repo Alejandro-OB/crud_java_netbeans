@@ -28,7 +28,7 @@
     <style>
         body {
             font-family: 'Roboto', Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: #e9ecef; /* color de fondo más agradable */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -39,37 +39,52 @@
             max-width: 400px;
             width: 100%;
             background-color: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
         h1 {
             text-align: center;
             font-weight: 600;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            color: #333; /* Color más oscuro para el título */
         }
         label {
-            font-weight: 500;
+            font-weight: 600;
+            color: #333;
         }
         .form-control {
-            border-radius: 5px;
+            border-radius: 8px;
             margin-bottom: 15px;
+            font-size: 1rem;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #007b5e; /* Verde para el foco */
+            box-shadow: 0 0 10px rgba(0, 123, 94, 0.25);
         }
         .btn-login {
             width: 100%;
-            padding: 0.6rem;
-            border-radius: 5px;
+            padding: 0.75rem;
+            border-radius: 30px;
             background-color: #007b5e;
             color: #ffffff;
             font-weight: 600;
+            border: none;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 123, 94, 0.3);
         }
         .btn-login:hover {
-            background-color: #006b53;
+            background-color: #005f47;
             color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 123, 94, 0.2);
         }
         .remember-me {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
         }
@@ -77,9 +92,10 @@
             margin-right: 10px;
         }
         .error-message {
-            color: red;
+            color: #dc3545; /* Rojo Bootstrap */
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -105,7 +121,7 @@
             <input type="checkbox" class="form-check-input" id="remember" name="remember">
             <label class="form-check-label" for="remember">Recordarme</label>
         </div>
-        <button type="submit" class="btn btn-login">Ingresar</button>
+        <button type="submit" class="btn-login">Ingresar</button>
     </form>
 </div>
 
