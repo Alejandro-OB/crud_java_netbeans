@@ -7,6 +7,7 @@
 /home/ortega/NetBeansProjects/CRUD_JAVA/src/main/java/edu/unicauca/apliweb/crud_java/persistence/jpa/TblAgricultorProductoJpaController.java
 /home/ortega/NetBeansProjects/CRUD_JAVA/src/main/java/edu/unicauca/apliweb/control/ServletCrudJava.java
 /home/ortega/NetBeansProjects/CRUD_JAVA/src/main/java/edu/unicauca/apliweb/crud_java/persistence/jpa/TblProductoClienteJpaController.java
+/home/ortega/NetBeansProjects/CRUD_JAVA/src/main/java/edu/unicauca/apliweb/control/MostrarConsultasServlet.java
 /home/ortega/NetBeansProjects/CRUD_JAVA/src/main/java/edu/unicauca/apliweb/crud_java/persistence/entities/TblAgricultorCliente.java
 /home/ortega/NetBeansProjects/CRUD_JAVA/src/main/java/edu/unicauca/apliweb/crud_java/persistence/entities/TblProductoCliente.java
 /home/ortega/NetBeansProjects/CRUD_JAVA/src/main/java/edu/unicauca/apliweb/crud_java/persistence/jpa/UsuariosJpaController.java

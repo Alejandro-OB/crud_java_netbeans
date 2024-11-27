@@ -183,6 +183,9 @@
                         <a href="<%=request.getContextPath()%>/list" class="nav-link">Lista Agricultores</a>
                     </li>
                     <li class="nav-item">
+                        <a href="<%=request.getContextPath()%>/mostrarConsultas" class="nav-link">Ver Consultas</a> <!-- Botón nuevo para Ver Consultas -->
+                    </li>
+                    <li class="nav-item">
                         <a href="<%=request.getContextPath()%>/logout" class="btn btn-logout">Cerrar sesión</a>
                     </li>
                 </ul>
@@ -190,6 +193,7 @@
         </div>
     </nav>
 </header>
+
 
 <div class="container mt-5">
     <!-- Bloque para mostrar mensajes de éxito o error sin la "x" -->

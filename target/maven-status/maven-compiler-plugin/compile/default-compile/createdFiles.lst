@@ -2,6 +2,7 @@ edu/unicauca/apliweb/crud_java/persistence/entities/TblProductoCliente_.class
 edu/unicauca/apliweb/control/ServletCrudJava.class
 edu/unicauca/apliweb/crud_java/persistence/entities/TblProductoCliente.class
 edu/unicauca/apliweb/crud_java/persistence/entities/TblCliente_.class
+edu/unicauca/apliweb/control/MostrarConsultasServlet.class
 edu/unicauca/apliweb/crud_java/persistence/entities/TblAgricultorCliente_.class
 edu/unicauca/apliweb/crud_java/persistence/jpa/TblProductoClienteJpaController.class
 edu/unicauca/apliweb/crud_java/persistence/jpa/exceptions/IllegalOrphanException.class
