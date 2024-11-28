@@ -6,7 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="javax.servlet.http.Cookie"%>
 <%
-    // Recuperar la cookie de usuario
+    
     String rememberedUser = "";
     Cookie[] cookies = request.getCookies();
     if (cookies != null) {
@@ -103,7 +103,7 @@
 <div class="login-container">
     <h1>Iniciar Sesión</h1>
     
-    <!-- Mostrar mensaje de error -->
+    
     <c:if test="${not empty errorMessage}">
         <p class="error-message"><c:out value="${errorMessage}" /></p>
     </c:if>

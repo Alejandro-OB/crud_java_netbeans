@@ -135,7 +135,7 @@
     <div class="container">
         <h1 class="text-center">Resultados de las Consultas</h1>
 
-        <!-- Tabla para la Consulta 1 -->
+        
         <div class="table-container">
             <h2>Agricultores con Productos por Temporada</h2>
             <div class="table-responsive">
@@ -160,7 +160,7 @@
             </div>
         </div>
 
-        <!-- Tabla para la Consulta 2 -->
+        
         <div class="table-container">
             <h2>Agricultores con Más de 5 Productos en una Temporada</h2>
             <div class="table-responsive">
@@ -185,7 +185,7 @@
             </div>
         </div>
 
-        <!-- Tabla para la Consulta 3 -->
+        
         <div class="table-container">
             <h2>Clientes y Agricultores con Productos en la Misma Temporada</h2>
             <div class="table-responsive">

@@ -98,7 +98,7 @@ public class ServletCrudJava extends HttpServlet {
         String telefono = request.getParameter("telefono").trim();
 
         if (nombre.isEmpty() || telefono.isEmpty()) {
-            // Mensaje de error si algún campo está vacío
+            
             request.setAttribute("message", "Error: Todos los campos son obligatorios.");
             listAgricultores(request, response);
             return;
@@ -128,7 +128,7 @@ public class ServletCrudJava extends HttpServlet {
         String telefono = request.getParameter("telefono").trim();
 
         if (nombre.isEmpty() || telefono.isEmpty()) {
-            // Mensaje de error si algún campo está vacío
+            
             request.setAttribute("message", "Error: Todos los campos son obligatorios.");
             listAgricultores(request, response);
             return;
@@ -141,10 +141,10 @@ public class ServletCrudJava extends HttpServlet {
 
             agricultorJpa.edit(agricultor);
 
-            // Mensaje de éxito
+           
             request.setAttribute("message", "Agricultor actualizado exitosamente.");
         } catch (Exception e) {
-            // Mensaje de error
+            
             request.setAttribute("message", "Error al actualizar el agricultor: " + e.getMessage());
         }
         listAgricultores(request, response);

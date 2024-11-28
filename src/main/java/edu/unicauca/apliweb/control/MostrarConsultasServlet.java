@@ -27,7 +27,7 @@ public class MostrarConsultasServlet extends HttpServlet {
         EntityManager em = emf.createEntityManager();
 
         try {
-            // Consulta 1: Agricultores con productos por temporada
+            
              String consulta1 = "SELECT a.nombre AS Agricultor, p.temporada AS Temporada, COUNT(p.codigo) AS TotalProductos " +
                    "FROM tbl_agricultor a " +
                    "JOIN tbl_agricultor_producto ap ON a.id_agricultor = ap.id_agricultor " +
@@ -39,7 +39,7 @@ public class MostrarConsultasServlet extends HttpServlet {
             List<Object[]> resultadoConsulta1 = query1.getResultList();
             request.setAttribute("resultadoConsulta1", resultadoConsulta1);
 
-            // Consulta 2: Agricultores con más de 5 productos en una temporada
+            
             String consulta2 = "SELECT a.nombre AS Agricultor, p.temporada AS Temporada, COUNT(p.codigo) AS TotalProductos " +
                    "FROM tbl_agricultor a " +
                    "JOIN tbl_agricultor_producto ap ON a.id_agricultor = ap.id_agricultor " +
