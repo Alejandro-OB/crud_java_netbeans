@@ -111,10 +111,10 @@ public class ServletCrudJava extends HttpServlet {
 
             agricultorJpa.create(agricultor);
 
-            // Mensaje de éxito
+            
             request.setAttribute("message", "Agricultor agregado exitosamente.");
         } catch (Exception e) {
-            // Mensaje de error
+            
             request.setAttribute("message", "Error al agregar el agricultor: " + e.getMessage());
         }
         listAgricultores(request, response);
@@ -155,10 +155,10 @@ public class ServletCrudJava extends HttpServlet {
         throws ServletException, IOException, SQLException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            agricultorJpa.destroy(id); // Método que lanza SQLException
+            agricultorJpa.destroy(id); 
             request.setAttribute("message", "Agricultor eliminado exitosamente.");
         } catch (Exception e) {
-            // Maneja otras excepciones
+            
             request.setAttribute("message", "Error al eliminar el agricultor: " + e.getMessage());
         }
         listAgricultores(request, response);

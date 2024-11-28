@@ -36,7 +36,7 @@ public class MostrarConsultasServlet extends HttpServlet {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU);
         EntityManager em = emf.createEntityManager();
 
-        // Consulta 1: Obtener todos los agricultores con la cantidad de productos que cada uno tiene registrados
+        // Obtener todos los agricultores con la cantidad de productos que cada uno tiene registrados
         String consulta1 = "SELECT a.nombre, COUNT(p) AS totalProductos FROM TblAgricultor a " +
                    "LEFT JOIN a.tblAgricultorProductoCollection ap " +
                    "LEFT JOIN ap.codigo p " +
@@ -47,7 +47,7 @@ public class MostrarConsultasServlet extends HttpServlet {
         List<Object[]> agricultoresConCantidadProductos = query1.getResultList();
         request.setAttribute("agricultoresConCantidadProductos", agricultoresConCantidadProductos);
 
-        // Consulta 2: Obtener los agricultores que tienen más de 3 productos registrados y ordenarlos por cantidad de productos
+        // Obtener los agricultores que tienen más de 3 productos registrados y ordenarlos por cantidad de productos
         String consulta2 = "SELECT a.nombre, COUNT(p) AS totalProductos FROM TblAgricultor a " +
                    "LEFT JOIN a.tblAgricultorProductoCollection ap " +
                    "LEFT JOIN ap.codigo p " +

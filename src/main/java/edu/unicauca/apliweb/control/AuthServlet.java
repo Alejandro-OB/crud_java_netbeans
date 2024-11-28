@@ -36,36 +36,32 @@ public class AuthServlet extends HttpServlet {
         Usuarios usuario = usuariosJpa.validarUsuario(username, password);
 
         if (usuario != null) {
-            // Credenciales correctas: crear sesión
+            
             HttpSession session = request.getSession();
             session.setAttribute("username", usuario.getUsername());
             session.setAttribute("idUsuario", usuario.getIdUsuario());
 
-            // Manejar la cookie "Recordarme"
             String remember = request.getParameter("remember");
             if ("on".equals(remember)) {
-                // Crear o actualizar la cookie
+                
                 javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie("rememberUser", username);
-                cookie.setMaxAge(7 * 24 * 60 * 60); // 1 semana
+                cookie.setMaxAge(7 * 24 * 60 * 60); 
                 response.addCookie(cookie);
             } else {
-                // Eliminar la cookie si no se seleccionó "Recordarme"
+                
                 javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie("rememberUser", "");
-                cookie.setMaxAge(0); // Expira inmediatamente
+                cookie.setMaxAge(0); 
                 response.addCookie(cookie);
             }
 
-            response.sendRedirect("ServletCrudJava"); // Redirige al CRUD
+            response.sendRedirect("ServletCrudJava"); 
         } else {
-            // Credenciales incorrectas
+            
             request.setAttribute("errorMessage", "Usuario o contraseña incorrectos. Intente nuevamente.");
             RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
             dispatcher.forward(request, response);
         }
     }
-
-
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -85,13 +81,13 @@ public class AuthServlet extends HttpServlet {
         Usuarios usuario = usuariosJpa.validarUsuario(username, password);
 
         if (usuario != null) {
-            // Usuario autenticado: almacenar información en la sesión
+            
             HttpSession session = request.getSession();
             session.setAttribute("username", usuario.getUsername());
             session.setAttribute("idUsuario", usuario.getIdUsuario());
-            response.sendRedirect("ServletCrudJava"); // Redirige a la página protegida
+            response.sendRedirect("ServletCrudJava"); 
         } else {
-            // Credenciales inválidas
+            
             request.setAttribute("message", "Usuario o contraseña incorrectos.");
             RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
             dispatcher.forward(request, response);
@@ -102,11 +98,8 @@ public class AuthServlet extends HttpServlet {
         throws IOException {
         HttpSession session = request.getSession(false);
         if (session != null) {
-            session.invalidate(); // Invalida la sesión
+            session.invalidate(); 
         }
-
-        // Nota: No eliminamos la cookie en este punto.
-
         response.sendRedirect("login.jsp");
     }
 }
