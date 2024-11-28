@@ -4,31 +4,21 @@
  */
 package edu.unicauca.apliweb.control;
 
-import edu.unicauca.apliweb.crud_java.persistence.entities.TblAgricultor;
-import edu.unicauca.apliweb.crud_java.persistence.jpa.TblAgricultorJpaController;
 import java.io.IOException;
+import java.util.List;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import javax.persistence.EntityManager;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 @WebServlet("/mostrarConsultas")
 public class MostrarConsultasServlet extends HttpServlet {
-    private TblAgricultorJpaController agricultorJpa;
     private final static String PU = "edu.unicauca.apliweb_CRUD_JAVA_war_1.0PU";
-
-    @Override
-    public void init() throws ServletException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU);
-        agricultorJpa = new TblAgricultorJpaController(emf);
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,33 +26,49 @@ public class MostrarConsultasServlet extends HttpServlet {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU);
         EntityManager em = emf.createEntityManager();
 
-        // Obtener todos los agricultores con la cantidad de productos que cada uno tiene registrados
-        String consulta1 = "SELECT a.nombre, COUNT(p) AS totalProductos FROM TblAgricultor a " +
-                   "LEFT JOIN a.tblAgricultorProductoCollection ap " +
-                   "LEFT JOIN ap.codigo p " +
-                   "GROUP BY a.nombre";
+        try {
+            // Consulta 1: Agricultores con productos por temporada
+             String consulta1 = "SELECT a.nombre AS Agricultor, p.temporada AS Temporada, COUNT(p.codigo) AS TotalProductos " +
+                   "FROM tbl_agricultor a " +
+                   "JOIN tbl_agricultor_producto ap ON a.id_agricultor = ap.id_agricultor " +
+                   "JOIN tbl_producto p ON ap.codigo = p.codigo " +
+                   "GROUP BY a.nombre, p.temporada " +
+                   "ORDER BY a.nombre, TotalProductos DESC";
 
+            Query query1 = em.createNativeQuery(consulta1);
+            List<Object[]> resultadoConsulta1 = query1.getResultList();
+            request.setAttribute("resultadoConsulta1", resultadoConsulta1);
 
-        Query query1 = em.createQuery(consulta1);
-        List<Object[]> agricultoresConCantidadProductos = query1.getResultList();
-        request.setAttribute("agricultoresConCantidadProductos", agricultoresConCantidadProductos);
+            // Consulta 2: Agricultores con más de 5 productos en una temporada
+            String consulta2 = "SELECT a.nombre AS Agricultor, p.temporada AS Temporada, COUNT(p.codigo) AS TotalProductos " +
+                   "FROM tbl_agricultor a " +
+                   "JOIN tbl_agricultor_producto ap ON a.id_agricultor = ap.id_agricultor " +
+                   "JOIN tbl_producto p ON ap.codigo = p.codigo " +
+                   "GROUP BY a.nombre, p.temporada " +
+                   "HAVING COUNT(p.codigo) > 5 " +
+                   "ORDER BY TotalProductos DESC";
 
-        // Obtener los agricultores que tienen más de 3 productos registrados y ordenarlos por cantidad de productos
-        String consulta2 = "SELECT a.nombre, COUNT(p) AS totalProductos FROM TblAgricultor a " +
-                   "LEFT JOIN a.tblAgricultorProductoCollection ap " +
-                   "LEFT JOIN ap.codigo p " +
-                   "GROUP BY a.nombre " +
-                   "HAVING COUNT(p) > 3 " +
-                   "ORDER BY totalProductos DESC";
+            Query query2 = em.createNativeQuery(consulta2);
+            List<Object[]> resultadoConsulta2 = query2.getResultList();
+            request.setAttribute("resultadoConsulta2", resultadoConsulta2);
 
+            String consulta3 = "SELECT a.nombre AS Agricultor, p.nombre AS Producto, p.temporada AS Temporada, " +
+                   "c.nombre AS Cliente, c.direccion AS DireccionCliente " +
+                   "FROM tbl_cliente c " +
+                   "JOIN tbl_agricultor_producto ap ON c.cedula = ap.id_agricultor " + // Ajustar si la relación es diferente
+                   "JOIN tbl_producto p ON ap.codigo = p.codigo " +
+                   "JOIN tbl_agricultor a ON ap.id_agricultor = a.id_agricultor " +
+                   "WHERE p.temporada IS NOT NULL " +
+                   "ORDER BY Temporada, a.nombre";
 
-        Query query2 = em.createQuery(consulta2);
-        List<Object[]> agricultoresConMasProductos = query2.getResultList();
-        request.setAttribute("agricultoresConMasProductos", agricultoresConMasProductos);
+            Query query3 = em.createNativeQuery(consulta3);
+            List<Object[]> resultadoConsulta3 = query3.getResultList();
+            request.setAttribute("resultadoConsulta3", resultadoConsulta3);
 
-        em.close();
+        } finally {
+            em.close();
+        }
 
         request.getRequestDispatcher("/MostrarConsultas.jsp").forward(request, response);
-        
     }
 }

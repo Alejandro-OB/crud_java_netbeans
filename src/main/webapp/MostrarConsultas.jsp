@@ -23,6 +23,9 @@
             font-weight: 600;
             margin-bottom: 20px;
         }
+        header {
+            margin-bottom: 20px;
+        }
         .navbar {
             background-color: #004d40;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -81,9 +84,6 @@
         .navbar-toggler-icon {
             background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
         }
-        header {
-            margin-bottom: 20px;
-        }
         .table-container {
             background-color: #ffffff;
             padding: 20px;
@@ -108,50 +108,51 @@
             text-align: center;
             vertical-align: middle;
         }
-        
     </style>
 </head>
-<header>
-    <nav class="navbar navbar-expand-md">
-        <div class="container d-flex justify-content-between align-items-center">
-            <a href="https://www.unicauca.edu.co" class="navbar-brand">Aplicación Ejemplo Apliweb</a>
-            <div class="navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a href="<%=request.getContextPath()%>/list" class="nav-link">Lista Agricultores</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<%=request.getContextPath()%>/mostrarConsultas" class="nav-link">Ver Consultas</a> <!-- Botón nuevo para Ver Consultas -->
-                    </li>
-                    <li class="nav-item">
-                        <a href="<%=request.getContextPath()%>/logout" class="btn btn-logout">Cerrar sesión</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
 <body>
-    
+    <header>
+        <nav class="navbar navbar-expand-md">
+            <div class="container d-flex justify-content-between align-items-center">
+                <a href="https://www.unicauca.edu.co" class="navbar-brand">Aplicación Ejemplo Apliweb</a>
+                <div class="navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="<%=request.getContextPath()%>/list" class="nav-link">Lista Agricultores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<%=request.getContextPath()%>/mostrarConsultas" class="nav-link">Ver Consultas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<%=request.getContextPath()%>/logout" class="nav-link">Cerrar sesión</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
 
     <div class="container">
+        <h1 class="text-center">Resultados de las Consultas</h1>
+
+        <!-- Tabla para la Consulta 1 -->
         <div class="table-container">
-            <h1>Consultas de Agricultores</h1>
-            
-            <h2>Agricultores con Cantidad de Productos</h2>
+            <h2>Agricultores con Productos por Temporada</h2>
             <div class="table-responsive">
                 <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
                             <th>Agricultor</th>
+                            <th>Temporada</th>
                             <th>Total de Productos</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="row" items="${agricultoresConCantidadProductos}">
+                        <c:forEach var="row" items="${resultadoConsulta1}">
                             <tr>
                                 <td><c:out value="${row[0]}"/></td>
                                 <td><c:out value="${row[1]}"/></td>
+                                <td><c:out value="${row[2]}"/></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -159,21 +160,53 @@
             </div>
         </div>
 
+        <!-- Tabla para la Consulta 2 -->
         <div class="table-container">
-            <h2>Agricultores con Más de 3 Productos Registrados</h2>
+            <h2>Agricultores con Más de 5 Productos en una Temporada</h2>
             <div class="table-responsive">
                 <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
                             <th>Agricultor</th>
+                            <th>Temporada</th>
                             <th>Total de Productos</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="row" items="${agricultoresConMasProductos}">
+                        <c:forEach var="row" items="${resultadoConsulta2}">
                             <tr>
                                 <td><c:out value="${row[0]}"/></td>
                                 <td><c:out value="${row[1]}"/></td>
+                                <td><c:out value="${row[2]}"/></td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tabla para la Consulta 3 -->
+        <div class="table-container">
+            <h2>Clientes y Agricultores con Productos en la Misma Temporada</h2>
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Agricultor</th>
+                            <th>Producto</th>
+                            <th>Temporada</th>
+                            <th>Cliente</th>
+                            <th>Dirección del Cliente</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="row" items="${resultadoConsulta3}">
+                            <tr>
+                                <td><c:out value="${row[0]}"/></td>
+                                <td><c:out value="${row[1]}"/></td>
+                                <td><c:out value="${row[2]}"/></td>
+                                <td><c:out value="${row[3]}"/></td>
+                                <td><c:out value="${row[4]}"/></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -181,10 +214,7 @@
             </div>
         </div>
     </div>
-
-    <!-- JavaScript de Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGaHfIlFJIl1gHkkKwXrm9O8iR" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIyFf3VS3XhFp7ik3iDJwljV0G17H0o0Pb26U4A" crossorigin="anonymous"></script>
 </body>
 </html>
+
+
